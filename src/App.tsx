@@ -15,10 +15,13 @@ useEffect(() => {
         interval = setInterval(countDownUntilZero, INTERVAL_IN_MILISECONDS);
         return () => clearInterval(interval);
     }, []);
+    const minutes = Math.floor(time / 1000 / 60);
+const seconds = Math.floor((time / 1000) % 60);
   return (
     <>
-        {(time/1000).toFixed(1)}s
-    </>
+  {String(minutes).padStart(2, "0")}:
+  {String(seconds).padStart(2, "0")}
+</>
   )
 }
 
