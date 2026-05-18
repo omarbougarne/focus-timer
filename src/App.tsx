@@ -1,24 +1,23 @@
 import {useEffect, useState} from 'react';
-
+const TIME_IN_MILISECONDS_TO_COUNTDOWN = 60*10*1000;
+const INTERVAL_IN_MILISECONDS = 100;
 function App() {
-let timer = 300;
-const interval = setInterval(() => {
-let minutes = 300/60
-let seconds = 300%60
-timer--;
-})
-const countDownUntilZero = () => {
+    const[time, setTime] = useState(TIME_IN_MILISECONDS_TO_COUNTDOWN);
+
+useEffect(() => {
+        let interval;
+        const countDownUntilZero = () => {
             setTime(prevTime => {
                 if (prevTime === 0) clearInterval(interval);
                 else return prevTime - INTERVAL_IN_MILISECONDS;
             })
+        }
+        interval = setInterval(countDownUntilZero, INTERVAL_IN_MILISECONDS);
+        return () => clearInterval(interval);
+    }, []);
   return (
     <>
-    <p>
-        <select value="Select Duration">
-            <option></option>
-        </select>
-    </p>
+        {(time/1000).toFixed(1)}s
     </>
   )
 }
